@@ -17,7 +17,8 @@ class DevelopSettings(Settings):
     DB_URL: str = Field(env="DEVELOP_DB_URL")
     ALLOW_ORIGINS: list[str] = [
         "http://localhost:3000",
-        "https://d15s9x1ybtvbwb.cloudfront.net",
+        "https:/irion.today",
+        "https:/www.irion.today",
     ]
     ALLOW_CREDENTIALS: bool = True
     ALLOW_METHODS: list[str] = ['*']
@@ -28,7 +29,8 @@ class ProductSettings(Settings):
     DB_URL: str = Field(env="PRODUCT_DB_URL")
     ALLOW_ORIGINS: list[str] = [
         "http://localhost:3000",
-        "https://d15s9x1ybtvbwb.cloudfront.net",
+        "https:/irion.today",
+        "https:/www.irion.today",
     ]
     ALLOW_CREDENTIALS: bool = True
     ALLOW_METHODS: list[str] = ['*']
