@@ -27,17 +27,17 @@ class CRUDAnimal(CRUDBase[Animal, CreateAnimal, UpdaetAnimal]):
     async def get_multi(
         self, db: Session, offset: int, limit: int
     ) -> list | None:
-        query = select(self.model)
-        instances = await db.execute(query)
-        result = jsonable_encoder(instances.scalars().all())
+        query = select(self.model, Shelter).join(Shelter)
+        instance = await db.execute(query)
+        result = jsonable_encoder(instance.fetchall())
 
         data_size = len(result)
         data = result[offset:limit]
 
         for dict in data:
-            dict["left_day"] = 510 - (
+            dict["Animal"]["left_day"] = 510 - (
                 datetime.today() - datetime.strptime(
-                    dict["started_date"], "%Y-%m-%dT%H:%M:%S"
+                    dict["Animal"]["started_date"], "%Y-%m-%dT%H:%M:%S"
                 )
         ).days
 
