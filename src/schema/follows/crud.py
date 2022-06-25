@@ -1,8 +1,8 @@
-from src.schema.crud_base import CRUDSchemaBase
+from pydantic import BaseModel
 
 
-class FollowBase(CRUDSchemaBase):
-    pass
+class FollowBase(BaseModel):
+    follow: bool | None
 
 
 class CreateFollow(FollowBase):
@@ -18,4 +18,4 @@ class CreateFollow(FollowBase):
 
 
 class UpdateFollow(FollowBase):
-    pass
+    follow: bool

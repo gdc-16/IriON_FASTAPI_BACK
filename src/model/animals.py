@@ -2,7 +2,8 @@ import enum
 from datetime import datetime
 
 from pydantic import HttpUrl
-from sqlalchemy import Column, String, Enum, ForeignKey, DateTime
+from sqlalchemy import Column, String, Enum, ForeignKey, DateTime, Integer
+from sqlalchemy.orm import relation
 
 from src.database import Base
 
@@ -13,6 +14,7 @@ class AnimalType(str, enum.Enum):
 
 
 class Animal(Base):
+    id: int = Column("id", Integer, primary_key=True, autoincrement=True)
     name: str = Column("name", String(length=8), nullable=False)
     animal_image_url: HttpUrl = Column(
         "animal_image_url", String(512), nullable=False
@@ -22,3 +24,6 @@ class Animal(Base):
     shelter_id: int = Column(
         "shelter_id", ForeignKey("shelters.id", ondelete="CASCADE")
     )
+
+    users = relation("User", secondary="follows", back_populates="animals")
+    shelters = relation("Shelter", back_populates="animals")

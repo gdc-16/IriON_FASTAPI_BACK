@@ -1,7 +1,7 @@
-from src.schema.crud_base import CRUDSchemaBase
+from pydantic import BaseModel
 
 
-class ShelterBase(CRUDSchemaBase):
+class ShelterBase(BaseModel):
     name: str | None
     location: str | None
     phone_number: str | None

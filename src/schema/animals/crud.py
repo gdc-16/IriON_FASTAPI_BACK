@@ -1,15 +1,14 @@
 from datetime import datetime
 
-from pydantic import HttpUrl
+from pydantic import BaseModel, HttpUrl
 
 from src.model import AnimalType
-from src.schema.crud_base import CRUDSchemaBase
 
 
-class AnimalBase(CRUDSchemaBase):
+class AnimalBase(BaseModel):
     name: str | None
     animal_image_url: HttpUrl | None
-    started_date: datetime | None
+    started_date: str | None
 
     class Config:
         schema_extra: dict = {
@@ -23,7 +22,7 @@ class CreateAnimal(AnimalBase):
     name: str
     animal_image_url: HttpUrl
     type: AnimalType
-    started_date: datetime
+    started_date: str
     shelter_id: int
 
     class Config:

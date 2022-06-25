@@ -1,5 +1,5 @@
-from src.schema.crud_base import CRUDSchemaBase
+from pydantic import BaseModel
 
 
-class UserBase(CRUDSchemaBase):
+class UserBase(BaseModel):
     pass

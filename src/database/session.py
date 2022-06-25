@@ -16,5 +16,6 @@ async def get_db() -> AsyncSession:
     async with session() as db:
         try:
             yield db
-        except:
+        finally:
             await db.close()
+        

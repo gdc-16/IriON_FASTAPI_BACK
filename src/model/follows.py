@@ -1,10 +1,17 @@
-from sqlalchemy import Column, Integer, ForeignKey
+from email.policy import default
+from sqlalchemy import Column, Integer, ForeignKey, Boolean
 
 from src.database import Base
 
 
 class Follow(Base):
-    follow: int = Column("follow", Integer, default=1)
+    id: int = Column(
+        "id",
+        Integer,
+        primary_key=True,
+        autoincrement=True,
+    )
+    follow: bool = Column("follow", Boolean, default=True)
     user_id: int = Column("user_id", Integer, ForeignKey(
         "users.id", ondelete="CASCADE")
     )
