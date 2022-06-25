@@ -66,7 +66,7 @@ async def get_animals(
 @router.post(path=f"/{SINGULAR_PREFIX}")
 async def create_animal(
     insert_data: CreateAnimal,
-    db=Depends(get_db),
+    db=Depends(get_db)
 ) -> JSONResponse:
     try:
         await animal_crud.create(db=db, obj_in=insert_data)

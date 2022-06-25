@@ -25,7 +25,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         query = select(self.model).where(self.model.id == id)
         instance = await db.execute(query)
         result = instance.fetchone()
-        return result
+        return jsonable_encoder(result)
 
     
     async def get_multi(
@@ -34,10 +34,13 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         offset: int,
         limit: int,
     ) -> list | None:
-        query = select(self.model).offset(offset).limit(limit)
+        query = select(self.model)
         instances = await db.execute(query)
         result = instances.scalars().all()
-        return result
+        return {
+            "data": jsonable_encoder(result[offset: limit]),
+            "size": len(result)
+        }
 
         
         

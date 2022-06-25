@@ -9,6 +9,7 @@ class AnimalBase(BaseModel):
     name: str | None
     animal_image_url: HttpUrl | None
     started_date: str | None
+    content: str | None
 
     class Config:
         schema_extra: dict = {
@@ -24,6 +25,9 @@ class CreateAnimal(AnimalBase):
     type: AnimalType
     started_date: str
     shelter_id: int
+    age: int
+    content: str
+    gender: str
 
     class Config:
         schema_extra: dict = {

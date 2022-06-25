@@ -24,6 +24,9 @@ class Animal(Base):
     shelter_id: int = Column(
         "shelter_id", ForeignKey("shelters.id", ondelete="CASCADE")
     )
+    age: int = Column("age", Integer, nullable=False)
+    content: str = Column("content", String(length=32), nullable=False)
+    gender: str = Column("gender", String(length=1), nullable=False)
 
     users = relation("User", secondary="follows", back_populates="animals")
     shelters = relation("Shelter", back_populates="animals")
